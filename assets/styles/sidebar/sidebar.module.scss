@@ -16,7 +16,7 @@
 		.UserImage {
 			width: 200px;
 			height: 200px;
-			border-radius: 50%;
+			border-radius: 10%;
 			overflow: hidden;
 			display: grid;
 			align-content: center;
@@ -36,35 +36,59 @@
 			align-items: center;
 			text-align: right;
 			direction: rtl;
+			position: relative;
 
 			color: #ffffff;
+			&::before {
+				position: absolute;
+				right: -30px;
+			}
 		}
 		.UserLevel {
 			font-family: Dana;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 19px;
+			font-size: 25px;
 			line-height: 32px;
 			display: flex;
 			align-items: center;
 			text-align: right;
 			direction: rtl;
+			position: relative;
 
 			color: #ffffff;
+			&::before {
+				font-size: 28px;
+				position: absolute;
+				right: -30px;
+			}
 		}
 		.UserAccess {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
 			align-content: center;
-			justify-content: center;
+			justify-content: space-around;
+			width: 100%;
 			div {
 				text-align: center;
+				font-size: 28px;
+				color: #ffffff;
+				opacity: 0.75;
+				transition: 0.3s;
+				&:hover {
+					opacity: 1;
+					cursor: pointer;
+					transition: 0.3s;
+				}
 			}
 			.Edit {
+				position: relative;
 			}
 			.Notifications {
+				position: relative;
 			}
 			.something {
+				position: relative;
 			}
 		}
 	}

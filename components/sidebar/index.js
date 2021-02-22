@@ -17,16 +17,16 @@ export default function Sidebar() {
         <div className={styles.UserImage}>
           <img src={"user.jpg"} alt={"esma karbar"} />
         </div>
-        <span className={styles.UserName}>
+        <span className={`${styles.UserName} db-user`}>
           محمد اوتادی
         </span>
-        <span className={styles.UserLevel}>
+        <span className={`${styles.UserLevel} db-level`}>
           مدیر
         </span>
         <div className={styles.UserAccess}>
-          <div className={styles.Edit}></div>
-          <div className={styles.Notifications}></div>
-          <div className={styles.something}></div>
+          <div className={`${styles.Edit} db-edit`}></div>
+          <div className={`${styles.Notifications} db-notif`}></div>
+          <div className={`${styles.something} db-notif`}></div>
         </div>
       </div>
       <div className={styles.RoutesSide}>
