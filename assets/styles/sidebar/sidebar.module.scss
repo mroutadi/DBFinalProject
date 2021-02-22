@@ -1,4 +1,92 @@
 .Sidebar {
-	display: block;
-	font-family: Yekan;
+	display: grid;
+	align-content: space-around;
+	grid-template-rows: 40% 45%;
+	justify-items: center;
+	.UserInfoSide {
+		width: 350px;
+		height: 400px;
+
+		background: #3aa6be;
+		border-radius: 25px;
+		display: grid;
+		grid-template-rows: 200px 50px 50px 50px;
+		align-content: space-around;
+		justify-content: center;
+		.UserImage {
+			width: 200px;
+			height: 200px;
+			border-radius: 50%;
+			overflow: hidden;
+			display: grid;
+			align-content: center;
+			justify-content: center;
+			.img {
+				min-width: 100%;
+				min-height: 100%;
+			}
+		}
+		.UserName {
+			font-family: Dana;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 28px;
+			line-height: 47px;
+			display: flex;
+			align-items: center;
+			text-align: right;
+			direction: rtl;
+
+			color: #ffffff;
+		}
+		.UserLevel {
+			font-family: Dana;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 19px;
+			line-height: 32px;
+			display: flex;
+			align-items: center;
+			text-align: right;
+			direction: rtl;
+
+			color: #ffffff;
+		}
+		.UserAccess {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			align-content: center;
+			justify-content: center;
+			div {
+				text-align: center;
+			}
+			.Edit {
+			}
+			.Notifications {
+			}
+			.something {
+			}
+		}
+	}
+	.RoutesSide {
+		width: 100%;
+		display: grid;
+		justify-content: center;
+		.RouteItem {
+			width: 300px;
+			height: 50px;
+			border-bottom: 1px solid #ffffff;
+			font-family: Dana;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 20px;
+			line-height: 33px;
+			display: flex;
+			align-items: center;
+			text-align: right;
+			letter-spacing: -0.025em;
+
+			color: rgba(255, 255, 255, 0.75);
+		}
+	}
 }

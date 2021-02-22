@@ -1,5 +1,31 @@
 @font-face {
-	font-family: Yekan;
-	src: url("./yekan-regular.eot"), url("./yekan-regular.ttf"),
-		url("./yekan-regular.woff"), url("./Yekan.ttf");
+	font-family: "Dana";
+	src: url("./ttf/dana-fanum-black.ttf") format("ttf"),
+		url("./eot/dana-fanum-black.eot") format("eot"),
+		url("./woff/dana-fanum-black.woff") format("woff"),
+		url("./woff2/dana-fanum-black.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Dana";
+	font-weight: bold;
+	src: url("./ttf/dana-fanum-bold.ttf") format("ttf"),
+		url("./eot/dana-fanum-bold.eot") format("eot"),
+		url("./woff/dana-fanum-bold.woff") format("woff"),
+		url("./woff2/dana-fanum-bold.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Dana";
+	font-weight: bolder;
+	src: url("./ttf/dana-fanum-extrabold.ttf") format("ttf"),
+		url("./eot/dana-fanum-extrabold.eot") format("eot"),
+		url("./woff/dana-fanum-extrabold.woff") format("woff"),
+		url("./woff2/dana-fanum-extrabold.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Dana";
+	font-weight: bolder;
+	src: url("./ttf/dana-fanum-extralight.ttf") format("ttf"),
+		url("./eot/dana-fanum-extralight.eot") format("eot"),
+		url("./woff/dana-fanum-extralight.woff") format("woff"),
+		url("./woff2/dana-fanum-extralight.woff2") format("woff2");
 }

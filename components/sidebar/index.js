@@ -33,7 +33,7 @@ export default function Sidebar() {
         {Object.keys(availableRoutes).map(
           (route) =>
             <Link href={`/${route}`} key={route}>
-              <a>
+              <a className={`${styles.RouteItem} deActive`}>
                 {availableRoutes[route]}
               </a>
             </Link>
