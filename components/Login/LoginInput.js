@@ -13,6 +13,7 @@ export default function LoginInput(props) {
         autoComplete={props.autoComplete}
       >
       </input>
+      {props.error && <span className={style.Error}>{props.error}</span>}
     </div>
   )
 }

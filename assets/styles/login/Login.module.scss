@@ -18,7 +18,7 @@
 	flex-direction: column;
 	justify-content: center;
 	margin: 0 auto;
-	margin-bottom: 1.56rem;
+	margin-bottom: 2.56rem;
 	padding: 0.87rem;
 	padding-top: 0.27rem;
 	position: relative;
@@ -51,6 +51,14 @@
 		text-align: right;
 		line-height: 1.5em;
 		margin-bottom: 0.5rem;
+	}
+	.Error {
+		top: calc(100% + 7.5px);
+		position: absolute;
+		color: $ERROR;
+		font-size: 1rem;
+		font-weight: bold;
+		right: 15px;
 	}
 }
 .password {

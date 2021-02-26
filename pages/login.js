@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
 import { Formik } from 'formik';
 import LoginInput from '../components/Login/LoginInput'
@@ -9,27 +9,65 @@ import FontAwesome from 'react-fontawesome'
 export default function Login() {
   const [loading, setLoading] = useState(false)
   const [VisiblePass, setVisiblePass] = useState(false)
+  const [initialValues, setInitialValues] = useState({
+    USERNAME: "",
+    PASSWORD: ""
+  })
+  const [ErrorStatus, setErrorStatus] = useState({
+    USERNAME: null,
+    PASSWORD: null
+  });
+  const [ErrorMessages, setErrorMessages] = useState({
+    USERNAME: null,
+    PASSWORD: null
+  });
+  const handleErrors = () => {
+    let ErrorMessages = {
+      USERNAME: null,
+      PASSWORD: null
+    };
+    //USERNAME
+    if (!!!initialValues.USERNAME) {
+      ErrorMessages.USERNAME = "لطفا نام کاربری خود را وارد کنید!"
+    }
+    //PASSWORD
+    if (!!!initialValues.PASSWORD) {
+      ErrorMessages.PASSWORD = "لطفا رمز ورود خود را وارد کنید!"
+    }
+    setErrorMessages({
+      USERNAME: ErrorMessages.USERNAME,
+      PASSWORD: ErrorMessages.PASSWORD
+    })
+    setErrorStatus({
+      USERNAME: !!ErrorMessages.USERNAME,
+      PASSWORD: !!ErrorMessages.PASSWORD
+    })
+  }
   const router = useRouter()
+
+  const handleChange = (event) => {
+    setInitialValues({
+      ...initialValues,
+      [event.target.name]: event.target.value
+    })
+  }
   return (
     <div className={style.LoginPage}>
       <Formik
         enableReinitialize
-        initialValues={{
-          USERNAME: "",
-          PASSWORD: ""
-        }}
+        initialValues={initialValues}
         onSubmit={(values, { setSubmitting }) => {
-          // setLoading(true);
-          console.log(values);
-          // setTimeout(() => {
-          //   setLoading(false);
-          // }, 2000);
+
+          handleErrors();
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+          }, 2000);
           setSubmitting(false)
         }}
       >
         {({
           values,
-          handleChange,
           handleBlur,
           handleSubmit,
           isSubmitting
@@ -47,6 +85,7 @@ export default function Login() {
                 value={values.USERNAME}
                 disabled={!!loading}
                 autoComplete="off"
+                error={ErrorStatus.USERNAME && ErrorMessages.USERNAME}
               />
               <div className={style.password}>
                 <span
@@ -72,9 +111,10 @@ export default function Login() {
                   placeholder="لطفا رمز عبور خود را وارد کنید"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.USERNAME}
+                  value={values.PASSWORD}
                   disabled={!!loading}
                   autoComplete="off"
+                  error={ErrorStatus.PASSWORD && ErrorMessages.PASSWORD}
                 />
               </div>
               <button type="submit"
