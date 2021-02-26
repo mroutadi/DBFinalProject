@@ -1,0 +1,125 @@
+@import "../variables";
+.LoginPage {
+	background-color: $LAYOUT_BG;
+	height: 100vh;
+	display: grid;
+	align-items: center;
+	width: 100vw;
+	justify-content: center;
+	grid-template-columns: 100%;
+}
+
+.SimpleInput {
+	width: 100%;
+	max-width: 400px;
+	border: 1px solid $LIGHT_BLUE;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+	margin-bottom: 1.56rem;
+	padding: 0.87rem;
+	padding-top: 0.27rem;
+	position: relative;
+	box-sizing: border-box;
+	input {
+		font-size: 1rem;
+		font-weight: 700;
+		font-family: "Dana";
+		letter-spacing: -0.056rem;
+		color: $LIGHT_BLUE;
+		line-height: 1.56em;
+		background-color: transparent;
+		border: none;
+		height: 1.563rem;
+		text-align: right;
+		&:focus {
+			border: none !important;
+			outline: none !important;
+		}
+	}
+	input:disabled {
+		opacity: 0.3;
+	}
+	label {
+		font-size: 0.87rem;
+		font-weight: 500;
+		font-family: "Dana";
+		letter-spacing: -0.049rem;
+		color: $LIGHT_BLUE;
+		text-align: right;
+		line-height: 1.5em;
+		margin-bottom: 0.5rem;
+	}
+}
+.password {
+	max-width: 400px;
+	text-align: center;
+	position: relative;
+	margin: 0 auto;
+	.passwordVisibillity {
+		color: $WHITE;
+		position: absolute;
+		left: 25px;
+		top: 55%;
+		color: $LIGHT_BLUE;
+		font-size: 25px;
+		z-index: 20;
+		transform: translate(-50%, -50%);
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+
+.Submit {
+	width: 100%;
+	max-width: 400px;
+	margin: 0 auto;
+	height: 4em;
+	background-color: $LIGHT_BLUE;
+	font-size: 0.87rem;
+	font-weight: 900;
+	color: $WHITE;
+	border-radius: 10px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: "Dana";
+	&:hover {
+		cursor: pointer;
+	}
+	&:focus {
+		outline: none;
+	}
+}
+
+.loader {
+	border: 2px solid $WHITE;
+	border-top: 2px solid transparent;
+	border-bottom: 2px solid transparent;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	animation: spin 1s linear infinite;
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(150deg);
+	}
+	50% {
+		transform: rotate(200deg);
+	}
+	75% {
+		transform: rotate(300deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

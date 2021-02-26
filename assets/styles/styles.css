@@ -1,15 +1,10 @@
 @charset "UTF-8";
-
 @font-face {
   font-family: "dbfinalproject";
-  src:url("fonts/dbfinalproject.eot");
-  src:url("fonts/dbfinalproject.eot?#iefix") format("embedded-opentype"),
-    url("fonts/dbfinalproject.woff") format("woff"),
-    url("fonts/dbfinalproject.ttf") format("truetype"),
-    url("fonts/dbfinalproject.svg#dbfinalproject") format("svg");
+  src: url("../fonts/dbfinalproject.eot");
+  src: url("../fonts/dbfinalproject.eot?#iefix") format("embedded-opentype"), url("../fonts/dbfinalproject.woff") format("woff"), url("../fonts/dbfinalproject.ttf") format("truetype"), url("../fonts/dbfinalproject.svg#dbfinalproject") format("svg");
   font-weight: normal;
   font-style: normal;
-
 }
 
 [data-icon]:before {
@@ -41,15 +36,19 @@
 .db-user:before {
   content: "\61";
 }
+
 .db-level:before {
   content: "\62";
 }
+
 .db-edit:before {
   content: "\63";
 }
+
 .db-notif:before {
   content: "\64";
 }
+
 .db-print:before {
   content: "\65";
 }
