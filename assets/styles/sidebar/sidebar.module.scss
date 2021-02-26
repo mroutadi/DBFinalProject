@@ -1,7 +1,7 @@
 .Sidebar {
 	display: grid;
 	align-content: space-around;
-	grid-template-rows: 40% 45%;
+	grid-template-rows: 400px calc(100% - 450px);
 	justify-items: center;
 	.UserInfoSide {
 		width: 350px;

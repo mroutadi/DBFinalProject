@@ -8,13 +8,14 @@
 	background: linear-gradient(270deg, $BODY_BG1 0%, $BODY_BG2 102.12%);
 
 	.Layout {
-		width: 1600px;
+		max-width: 1600px;
 		height: 95vh;
 		background-color: $LAYOUT_BG;
 		border-radius: 50px;
 		direction: rtl;
 		display: grid;
-		grid-template-columns: 400px 1200px;
+		grid-template-columns: 400px calc(100% - 400px);
+		width: 95vw;
 
 		.Content {
 			width: 100%;
