@@ -1,3 +1,4 @@
+@import "../variables";
 .Sidebar {
 	display: grid;
 	align-content: space-around;
@@ -7,7 +8,8 @@
 		width: 350px;
 		height: 400px;
 
-		background: #3aa6be;
+		background: $LAYOUT_BGL;
+		box-shadow: 0 0 15px -5px $LAYOUT_BGL;
 		border-radius: 25px;
 		display: grid;
 		grid-template-rows: 200px 50px 50px 50px;
@@ -38,7 +40,7 @@
 			direction: rtl;
 			position: relative;
 
-			color: #ffffff;
+			color: $WHITE;
 			&::before {
 				position: absolute;
 				right: -30px;
@@ -56,7 +58,7 @@
 			direction: rtl;
 			position: relative;
 
-			color: #ffffff;
+			color: $WHITE;
 			&::before {
 				font-size: 28px;
 				position: absolute;
@@ -72,7 +74,7 @@
 			div {
 				text-align: center;
 				font-size: 28px;
-				color: #ffffff;
+				color: $WHITE;
 				opacity: 0.75;
 				transition: 0.3s;
 				&:hover {
@@ -99,18 +101,21 @@
 		.RouteItem {
 			width: 300px;
 			height: 50px;
-			border-bottom: 1px solid #ffffff;
+			border-bottom: 1px solid $WHITE;
 			font-family: Dana;
 			font-style: normal;
-			font-weight: normal;
 			font-size: 20px;
 			line-height: 33px;
 			display: flex;
 			align-items: center;
 			text-align: right;
 			letter-spacing: -0.025em;
-
-			color: rgba(255, 255, 255, 0.75);
+			font-weight: bold;
+			color: rgba(255, 255, 255);
+			&:hover {
+				text-shadow: 0 0 15px $DARK_BLUE;
+				padding: 0 10px;
+			}
 		}
 	}
 }

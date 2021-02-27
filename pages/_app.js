@@ -1,3 +1,5 @@
+import '../services/config'
+
 import '../assets/styles/globals.css'
 import '../assets/fonts/fonts.scss'
 import '../assets/styles/styles.css'

@@ -5,7 +5,8 @@ import LoginInput from '../components/Login/LoginInput'
 import { useRouter } from 'next/router'
 import style from '../assets/styles/login/Login.module.scss'
 import FontAwesome from 'react-fontawesome'
-
+import { login } from '../services/Authentication/login'
+import { attachJWT } from '../services/config'
 export default function Login() {
   const [loading, setLoading] = useState(false)
   const [VisiblePass, setVisiblePass] = useState(false)
@@ -21,18 +22,24 @@ export default function Login() {
     USERNAME: null,
     PASSWORD: null
   });
-  const handleErrors = () => {
+  const handleErrors = (
+    usernameErr = "لطفا نام کاربری خود را وارد کنید!",
+    passwordErr = "لطفا رمز ورود خود را وارد کنید!"
+  ) => {
+    let error = false;
     let ErrorMessages = {
       USERNAME: null,
       PASSWORD: null
     };
     //USERNAME
     if (!!!initialValues.USERNAME) {
-      ErrorMessages.USERNAME = "لطفا نام کاربری خود را وارد کنید!"
+      ErrorMessages.USERNAME = usernameErr;
+      error = true;
     }
     //PASSWORD
     if (!!!initialValues.PASSWORD) {
-      ErrorMessages.PASSWORD = "لطفا رمز ورود خود را وارد کنید!"
+      ErrorMessages.PASSWORD = passwordErr;
+      error = true;
     }
     setErrorMessages({
       USERNAME: ErrorMessages.USERNAME,
@@ -42,6 +49,7 @@ export default function Login() {
       USERNAME: !!ErrorMessages.USERNAME,
       PASSWORD: !!ErrorMessages.PASSWORD
     })
+    return error;
   }
   const router = useRouter()
 
@@ -57,12 +65,24 @@ export default function Login() {
         enableReinitialize
         initialValues={initialValues}
         onSubmit={(values, { setSubmitting }) => {
-
-          handleErrors();
           setLoading(true);
-          setTimeout(() => {
+          setSubmitting(true)
+          if (handleErrors()) {
             setLoading(false);
-          }, 2000);
+          } else {
+            login(values.USERNAME, values.PASSWORD)
+              .then(
+                response => response.data
+              )
+              .then(
+                (res) => console.log("here we a have to redirect")
+              ).catch(
+                (err) => {
+                  err && err.error && handleErrors(err.error.username[0], err.error.password[0])
+                }
+              )
+            setLoading(false);
+          }
           setSubmitting(false)
         }}
       >
@@ -123,10 +143,10 @@ export default function Login() {
                 {!!loading ? <div className={style.loader} /> : "ورود"}
               </button>
             </form>
-            <br /><br />
+            <br />
           </React.Fragment>
         )}
       </Formik>
-    </div>
+    </div >
   )
 }

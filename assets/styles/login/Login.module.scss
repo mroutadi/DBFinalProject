@@ -7,6 +7,7 @@
 	width: 100vw;
 	justify-content: center;
 	grid-template-columns: 100%;
+	padding: 0 5%;
 }
 
 .SimpleInput {
@@ -86,11 +87,11 @@
 	width: 100%;
 	max-width: 400px;
 	margin: 0 auto;
-	height: 4em;
+	height: 3.5em;
 	background-color: $LIGHT_BLUE;
-	font-size: 0.87rem;
+	font-size: 1.1rem;
 	font-weight: 900;
-	color: $WHITE;
+	color: $DARK_BLUE;
 	border-radius: 10px;
 	border: none;
 	display: flex;
