@@ -1,6 +1,6 @@
 @import "../variables";
 .LoginPage {
-	background-color: $LAYOUT_BG;
+	background-color: $BODY_BG1;
 	height: 100vh;
 	display: grid;
 	align-items: center;
@@ -13,7 +13,7 @@
 .SimpleInput {
 	width: 100%;
 	max-width: 400px;
-	border: 1px solid $LIGHT_BLUE;
+	border: 1px solid $LIGHT_MAIN_COLOR;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
@@ -29,7 +29,7 @@
 		font-weight: 700;
 		font-family: "Dana";
 		letter-spacing: -0.056rem;
-		color: $LIGHT_BLUE;
+		color: $LIGHT_MAIN_COLOR;
 		line-height: 1.56em;
 		background-color: transparent;
 		border: none;
@@ -48,7 +48,7 @@
 		font-weight: 500;
 		font-family: "Dana";
 		letter-spacing: -0.049rem;
-		color: $LIGHT_BLUE;
+		color: $LIGHT_MAIN_COLOR;
 		text-align: right;
 		line-height: 1.5em;
 		margin-bottom: 0.5rem;
@@ -72,7 +72,7 @@
 		position: absolute;
 		left: 25px;
 		top: 55%;
-		color: $LIGHT_BLUE;
+		color: $LIGHT_MAIN_COLOR;
 		font-size: 25px;
 		z-index: 20;
 		transform: translate(-50%, -50%);
@@ -88,10 +88,10 @@
 	max-width: 400px;
 	margin: 0 auto;
 	height: 3.5em;
-	background-color: $LIGHT_BLUE;
+	background-color: $LIGHT_MAIN_COLOR;
 	font-size: 1.1rem;
 	font-weight: 900;
-	color: $DARK_BLUE;
+	color: $DARK_MAIN_COLOR;
 	border-radius: 10px;
 	border: none;
 	display: flex;

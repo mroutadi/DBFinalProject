@@ -8,6 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ag-grid-community/client-side-row-model": "^25.1.0",
+    "@ag-grid-community/core": "^25.1.0",
+    "@ag-grid-community/react": "^25.1.0",
+    "ag-grid-community": "^25.1.0",
+    "ag-grid-react": "^25.1.0",
     "axios": "^0.21.1",
     "formik": "^2.2.6",
     "next": "10.0.7",

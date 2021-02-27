@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://9419dea3091c.ngrok.io';
+axios.defaults.baseURL = 'http://0f2187d4ac79.ngrok.io';
 
 //JWT
 export const attachJWT = (AUTH_TOKEN) => {
