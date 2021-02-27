@@ -3,8 +3,9 @@ import ndStyle from '../assets/styles/utils/newData.module.scss'
 import React, { useEffect, useState } from 'react';
 import { AgGridColumn, AgGridReact } from '@ag-grid-community/react';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { getEmployees } from '../services/Employee/employeeList'
 
-export default () => {
+export default function Table() {
   const [gridApi, setGridApi] = useState(null);
   const [rowData, setRowData] = useState(null);
 
@@ -16,26 +17,20 @@ export default () => {
 
   const onGridReady = (params) => {
     setGridApi(params.api);
-
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.open('GET', 'https://www.ag-grid.com/example-assets/olympic-winners.json');
-    httpRequest.send();
-    httpRequest.onreadystatechange = function () {
-      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-        var httpResult = JSON.parse(httpRequest.responseText);
-        setRowData(httpResult);
-      }
-    };
+    getEmployees().
+      then(res => res.data).
+      then(data => setRowData(data.data)).
+      catch(err => console.error(err))
   };
 
   return (
     <Layout>
       <div className={ndStyle.newData}>
         <button className={ndStyle.newDataButton}>
-          درخواست مساعده
+          افزودن کارمند جدید
           </button>
       </div>
-      <div style={{ height: '100%' }}>
+      <div className={`table__Container`} style={{ height: '100%' }}>
         <div style={{ marginBottom: '5px' }}>
         </div>
         <div style={{ height: 'calc(100% - 25px)' }} className="ag-theme-alpine">
@@ -43,17 +38,11 @@ export default () => {
             <AgGridReact
               modules={[ClientSideRowModelModule]}
               rowData={rowData}
+              rowClass={`tableRow`}
               onGridReady={onGridReady}>
-              <AgGridColumn headerName="ورزشکار" field="athlete" width={150} />
-              <AgGridColumn field="age" width={90} />
-              <AgGridColumn field="country" width={150} />
-              <AgGridColumn field="year" width={90} />
-              <AgGridColumn field="date" width={150} />
-              <AgGridColumn field="sport" width={150} />
-              <AgGridColumn field="gold" width={100} />
-              <AgGridColumn field="silver" width={100} />
-              <AgGridColumn field="bronze" width={100} />
-              <AgGridColumn field="total" width={100} />
+              <AgGridColumn headerName="نام" field="first_name" width={150} />
+              <AgGridColumn headerName="نام خانوادگی" field="last_name" width={150} />
+              <AgGridColumn headerName="نام کاربری" field="username" width={150} />
             </AgGridReact>
           </div>
         </div>

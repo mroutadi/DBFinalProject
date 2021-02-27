@@ -75,7 +75,10 @@ export default function Login() {
                 response => response.data
               )
               .then(
-                (res) => console.log("here we a have to redirect")
+                (res) => {
+                  attachJWT(res.access_token)
+                  router.push("/assistance")
+                }
               ).catch(
                 (err) => {
                   err && err.error && handleErrors(err.error.username[0], err.error.password[0])

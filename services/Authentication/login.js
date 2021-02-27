@@ -1,7 +1,6 @@
-import axios from 'axios'
+import { AxiosInstance } from '../config'
 export const login = (username, password) => {
-  console.log(username, password);
-  return axios
+  return AxiosInstance
     .post(
       '/api/auth/login',
       {
