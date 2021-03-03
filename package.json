@@ -8,17 +8,13 @@
     "start": "next start"
   },
   "dependencies": {
-    "@ag-grid-community/client-side-row-model": "^25.1.0",
-    "@ag-grid-community/core": "^25.1.0",
-    "@ag-grid-community/react": "^25.1.0",
-    "ag-grid-community": "^25.1.0",
-    "ag-grid-react": "^25.1.0",
     "axios": "^0.21.1",
     "formik": "^2.2.6",
     "next": "10.0.7",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-fontawesome": "^1.7.1",
-    "sass": "^1.32.8"
+    "sass": "^1.32.8",
+    "swr": "^0.4.2"
   }
 }

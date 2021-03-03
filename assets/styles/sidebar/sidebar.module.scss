@@ -28,11 +28,26 @@
 				min-height: 100%;
 			}
 		}
-		.UserName {
+		.UserInfo {
 			font-family: Dana;
 			font-style: normal;
 			font-weight: bold;
 			font-size: 28px;
+			line-height: 47px;
+			display: flex;
+			align-items: center;
+			text-align: center;
+			justify-content: center;
+			direction: rtl;
+			position: relative;
+
+			color: $WHITE;
+		}
+		.UserName {
+			font-family: Dana;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 22px;
 			line-height: 47px;
 			display: flex;
 			align-items: center;

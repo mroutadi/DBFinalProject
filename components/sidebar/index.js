@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '../../assets/styles/sidebar/sidebar.module.scss'
 import Link from 'next/link'
+import { me } from '../../services/Authentication/me'
+import useSWR from 'swr'
 
 export default function Sidebar() {
+  const { data, error } = useSWR('Profile', me)
+  useEffect(() => {
+    console.log(data);
+    console.log(error);
+  })
   const availableRoutes = {
     "dashboard": "داشبورد",
     "advance": "مساعده ها",
@@ -17,8 +24,11 @@ export default function Sidebar() {
         <div className={styles.UserImage}>
           <img src={"user.jpg"} alt={"esma karbar"} />
         </div>
+        <span className={styles.UserInfo}>
+          {data.data.first_name} {data.data.last_name}
+        </span>
         <span className={`${styles.UserName} db-user`}>
-          محمد اوتادی
+          {data.data.username}
         </span>
         <span className={`${styles.UserLevel} db-level`}>
           مدیر
