@@ -7,8 +7,8 @@ import useSWR from 'swr'
 export default function Sidebar() {
   const { data, error } = useSWR('Profile', me)
   useEffect(() => {
-    console.log(data);
-    console.log(error);
+    // console.log(data);
+    // console.log(error);
   })
   const availableRoutes = {
     "dashboard": "داشبورد",

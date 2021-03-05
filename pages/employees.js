@@ -72,43 +72,19 @@ export default function Table() {
         </div>
         <div className={table.body}>
           {rowData.map(row =>
-            <div className={table.row}>
-              <div className={table.column}>
-                {row.first_name}
-              </div>
-              <div className={table.column}>
-                {row.last_name}
-              </div>
-              <div className={table.column}>
-                {row.username}
-              </div>
-            </div>
-          )}
-          {rowData.map(row =>
-            <div className={table.row}>
-              <div className={table.column}>
-                {row.first_name}
-              </div>
-              <div className={table.column}>
-                {row.last_name}
-              </div>
-              <div className={table.column}>
-                {row.username}
-              </div>
-            </div>
-          )}
-          {rowData.map(row =>
-            <div className={table.row}>
-              <div className={table.column}>
-                {row.first_name}
-              </div>
-              <div className={table.column}>
-                {row.last_name}
-              </div>
-              <div className={table.column}>
-                {row.username}
-              </div>
-            </div>
+            <Link href={`/employee/${row.id}`}>
+              <a className={table.row}>
+                <div className={table.column}>
+                  {row.first_name}
+                </div>
+                <div className={table.column}>
+                  {row.last_name}
+                </div>
+                <div className={table.column}>
+                  {row.username}
+                </div>
+              </a>
+            </Link>
           )}
         </div>
       </div>}
