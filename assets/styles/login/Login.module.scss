@@ -8,6 +8,7 @@
 	justify-content: center;
 	grid-template-columns: 100%;
 	padding: 0 5%;
+	position: relative;
 }
 
 .SimpleInput {
@@ -130,5 +131,27 @@
 	}
 	100% {
 		transform: rotate(360deg);
+	}
+}
+.bgContainerr,
+.bgContainerl {
+	background-image: url("../../../public/bg.png");
+	width: 477px;
+	height: 100vh;
+	bottom: 0;
+	display: block;
+	position: absolute;
+}
+.bgContainerr {
+	right: 0;
+	@media screen and (max-width: 1400.14px) {
+		height: 30vh;
+		width: 100vw;
+	}
+}
+.bgContainerl {
+	left: 0;
+	@media screen and (max-width: 1400.14px) {
+		display: none;
 	}
 }

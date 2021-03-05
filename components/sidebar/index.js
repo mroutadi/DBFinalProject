@@ -1,23 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../../assets/styles/sidebar/sidebar.module.scss'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { me } from '../../services/Authentication/me'
 import { logout } from '../../services/Authentication/logout'
 import useSWR from 'swr'
+import routes from '../../utils/sidebarRoutes'
 
 export default function Sidebar() {
-  const { data, error } = useSWR('Profile', me)
+  const { data, error } = useSWR('Profile', me);
+  const [availableRoutes, setAvailableRoutes] = useState(routes.selfAdmin)
+  const router = useRouter();
   useEffect(() => {
-    // console.log(data);
-    // console.log(error);
+    if (
+      data &&
+      data.data.role === "admin" &&
+      router.pathname.includes("employees/")) setAvailableRoutes(routes.adminUser);
+    else if (data && data.data.role === "admin") setAvailableRoutes(routes.selfAdmin)
+    else if (data && data.data.role === "employee") setAvailableRoutes(routes.selfUser)
   })
-  const availableRoutes = {
-    "dashboard": "داشبورد",
-    "advance": "مساعده ها",
-    "loans": "وام ها",
-    "absence": "مرخصی ها",
-    "apyslip": "فیش حقوقی",
-    "timesheet": "جدول ساعات کاری",
+  const urlCreator = (route) => {
+    if (data && (data.data.role === "admin" || data.data.role === "employee")) return `/${route}`;
+    else if (
+      data &&
+      data.data.role === "employee" &&
+      router.pathname.includes("employees")) return `${asPath}${route}`;
   }
   return (
     <div className={styles.Sidebar}>
@@ -32,7 +39,8 @@ export default function Sidebar() {
           {data && data.data.username}
         </span>
         <span className={`${styles.UserLevel} db-level`}>
-          مدیر
+          {data && data.data.role === "admin" ? "مدیر" : data && data.data.role === "employee" ?
+            "کارمند" : ''}
         </span>
         <div className={styles.UserAccess}>
           <div className={`${styles.Edit} db-edit`}></div>
@@ -45,13 +53,13 @@ export default function Sidebar() {
       <div className={styles.RoutesSide}>
         {Object.keys(availableRoutes).map(
           (route) =>
-            <Link href={`/${route}`} key={route}>
+            <Link href={`${urlCreator(route)}`} key={route}>
               <a className={`${styles.RouteItem} deActive`}>
                 {availableRoutes[route]}
               </a>
             </Link>
         )}
       </div>
-    </div >
+    </div>
   )
 }

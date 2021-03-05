@@ -4,6 +4,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
+	position: relative;
 
 	background: linear-gradient(270deg, $BODY_BG1 0%, $BODY_BG2 102.12%);
 
@@ -17,6 +18,7 @@
 		grid-template-columns: 400px calc(100% - 400px);
 		width: 95vw;
 		overflow: hidden;
+		z-index: 5;
 
 		.Content {
 			width: calc(100% - 10px);
@@ -31,5 +33,21 @@
 			);
 			border-radius: 50px;
 		}
+	}
+
+	.bgContainerr,
+	.bgContainerl {
+		background-image: url("../../../public/bg.png");
+		width: 95px;
+		height: 100vh;
+		bottom: 0;
+		display: block;
+		position: absolute;
+	}
+	.bgContainerr {
+		right: 0;
+	}
+	.bgContainerl {
+		left: 0;
 	}
 }

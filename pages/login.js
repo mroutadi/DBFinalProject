@@ -61,6 +61,7 @@ export default function Login() {
   }
   return (
     <div className={style.LoginPage}>
+      <span className={style.bgContainerl} />
       <Formik
         enableReinitialize
         initialValues={initialValues}
@@ -150,6 +151,7 @@ export default function Login() {
           </React.Fragment>
         )}
       </Formik>
-    </div >
+      <span className={style.bgContainerr} />
+    </div>
   )
 }

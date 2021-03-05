@@ -18,7 +18,7 @@ AxiosInstance.interceptors.request.use(
 )
 AxiosInstance.interceptors.response.use(
   null, (err) => {
-    if (err.response.status === 401) {
+    if (err && err.response && err.response.status === 401) {
       Router.push('/login')
     }
   }

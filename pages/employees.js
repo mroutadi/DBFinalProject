@@ -73,7 +73,7 @@ export default function Table() {
         </div>
         <div className={table.body}>
           {rowData.map(row =>
-            <Link key={row.id} href={`/employee/${row.id}`}>
+            <Link key={row.id} href={`/employees/${row.id}`}>
               <a className={table.row}>
                 <div className={table.column}>
                   {row.first_name}
