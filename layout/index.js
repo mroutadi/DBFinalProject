@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '../assets/styles/layout/layout.module.scss'
 import Sidebar from '../components/sidebar'
 

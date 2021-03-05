@@ -37,10 +37,6 @@
   content: "\61";
 }
 
-.db-level:before {
-  content: "\62";
-}
-
 .db-edit:before {
   content: "\63";
 }
@@ -51,4 +47,12 @@
 
 .db-print:before {
   content: "\65";
+}
+
+.db-level:before {
+  content: "\62";
+}
+
+.db-logout:before {
+  content: "\66";
 }

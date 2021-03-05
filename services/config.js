@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Router from 'next/router'
 
 export const AxiosInstance = axios.create({
   baseURL: 'https://idk.mohsenyz.ir/'
@@ -13,6 +14,13 @@ AxiosInstance.interceptors.request.use(
     return config;
   }, (err) => {
     return Promise.reject(err);
+  }
+)
+AxiosInstance.interceptors.response.use(
+  null, (err) => {
+    if (err.response.status === 401) {
+      Router.push('/login')
+    }
   }
 )
 

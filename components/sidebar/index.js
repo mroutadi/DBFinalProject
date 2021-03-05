@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styles from '../../assets/styles/sidebar/sidebar.module.scss'
 import Link from 'next/link'
 import { me } from '../../services/Authentication/me'
+import { logout } from '../../services/Authentication/logout'
 import useSWR from 'swr'
 
 export default function Sidebar() {
@@ -35,8 +36,10 @@ export default function Sidebar() {
         </span>
         <div className={styles.UserAccess}>
           <div className={`${styles.Edit} db-edit`}></div>
-          <div className={`${styles.Notifications} db-notif`}></div>
-          <div className={`${styles.something} db-notif`}></div>
+          <div className={`${styles.Notifications} db-notif`} ></div>
+          <div className={`${styles.something} db-logout`} onClick={() => {
+            logout().then(res => console.log("you've been log out"));
+          }}></div>
         </div>
       </div>
       <div className={styles.RoutesSide}>
@@ -49,6 +52,6 @@ export default function Sidebar() {
             </Link>
         )}
       </div>
-    </div>
+    </div >
   )
 }

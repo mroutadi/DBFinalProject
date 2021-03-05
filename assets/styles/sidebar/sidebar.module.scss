@@ -12,7 +12,7 @@
 		box-shadow: 0 0 15px -5px $LAYOUT_BGL;
 		border-radius: 25px;
 		display: grid;
-		grid-template-rows: 200px 50px 50px 50px;
+		grid-template-rows: 210px 40px 50px 50px;
 		align-content: space-around;
 		justify-content: center;
 		.UserImage {
@@ -20,6 +20,7 @@
 			height: 200px;
 			border-radius: 10%;
 			overflow: hidden;
+			margin: 10px auto;
 			display: grid;
 			align-content: center;
 			justify-content: center;
@@ -92,6 +93,15 @@
 				color: $WHITE;
 				opacity: 0.75;
 				transition: 0.3s;
+				&:hover::after {
+					position: absolute;
+					top: 90%;
+					font-size: 20px;
+					background-color: rgba($color: $BODY_BG2, $alpha: 0.5);
+					padding: 5px;
+					border-radius: 5px;
+					left: 0;
+				}
 				&:hover {
 					opacity: 1;
 					cursor: pointer;
@@ -100,12 +110,21 @@
 			}
 			.Edit {
 				position: relative;
+				&:hover::after {
+					content: "ویرایش";
+				}
 			}
 			.Notifications {
 				position: relative;
+				&:hover::after {
+					content: "اعلانات";
+				}
 			}
 			.something {
 				position: relative;
+				&:hover::after {
+					content: "خروج";
+				}
 			}
 		}
 	}

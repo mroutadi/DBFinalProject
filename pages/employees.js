@@ -39,12 +39,13 @@ export default function Table() {
       username: "oiuygfy789",
     },
   ]
-
-  useEffect(() => {
-    getEmployees().
+  const [loading, setLoading] = useState(true)
+  useEffect(async () => {
+    await getEmployees().
       then(res => res.data).
       then(data => {
         setRowData(data.data)
+        setLoading(false)
       }).
       catch(err => console.error(err))
   }, []);
@@ -56,7 +57,7 @@ export default function Table() {
           افزودن کارمند جدید
           </button>
       </div>
-      {!!!rowData.length ? <div className={table.loaderCont}><div className={table.loader} /></div> : <div className={table.container}>
+      {!!loading ? <div className={table.loaderCont}><div className={table.loader} /></div> : <div className={table.container}>
         <div className={table.header}>
           <div className={table.row}>
             <div className={table.column}>
@@ -72,7 +73,7 @@ export default function Table() {
         </div>
         <div className={table.body}>
           {rowData.map(row =>
-            <Link href={`/employee/${row.id}`}>
+            <Link key={row.id} href={`/employee/${row.id}`}>
               <a className={table.row}>
                 <div className={table.column}>
                   {row.first_name}

@@ -77,7 +77,7 @@ export default function Login() {
               .then(
                 (res) => {
                   attachJWT(res.access_token)
-                  router.push("/assistance")
+                  router.push("/employees")
                 }
               ).catch(
                 (err) => {
