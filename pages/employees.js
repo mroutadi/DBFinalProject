@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { getEmployees } from '../services/Employee/employeeList'
 
 export default function Table() {
-  const [gridApi, setGridApi] = useState(null);
   const [rowData, setRowData] = useState([]);
   const t = [
     {
@@ -57,16 +56,18 @@ export default function Table() {
           افزودن کارمند جدید
           </button>
       </div>
-      <div className={table.container}>
+      {!!!rowData.length ? <div className={table.loaderCont}><div className={table.loader} /></div> : <div className={table.container}>
         <div className={table.header}>
-          <div className={table.column}>
-            نام
-          </div>
-          <div className={table.column}>
-            نام خانوادگی
-          </div>
-          <div className={table.column}>
-            نام کاربری
+          <div className={table.row}>
+            <div className={table.column}>
+              نام
+            </div>
+            <div className={table.column}>
+              نام خانوادگی
+            </div>
+            <div className={table.column}>
+              نام کاربری
+            </div>
           </div>
         </div>
         <div className={table.body}>
@@ -83,8 +84,34 @@ export default function Table() {
               </div>
             </div>
           )}
+          {rowData.map(row =>
+            <div className={table.row}>
+              <div className={table.column}>
+                {row.first_name}
+              </div>
+              <div className={table.column}>
+                {row.last_name}
+              </div>
+              <div className={table.column}>
+                {row.username}
+              </div>
+            </div>
+          )}
+          {rowData.map(row =>
+            <div className={table.row}>
+              <div className={table.column}>
+                {row.first_name}
+              </div>
+              <div className={table.column}>
+                {row.last_name}
+              </div>
+              <div className={table.column}>
+                {row.username}
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      </div>}
     </Layout>
   );
 };

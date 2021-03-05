@@ -25,10 +25,10 @@ export default function Sidebar() {
           <img src={"user.jpg"} alt={"esma karbar"} />
         </div>
         <span className={styles.UserInfo}>
-          {data.data.first_name} {data.data.last_name}
+          {data && data.data.first_name} {data && data.data.last_name}
         </span>
         <span className={`${styles.UserName} db-user`}>
-          {data.data.username}
+          {data && data.data.username}
         </span>
         <span className={`${styles.UserLevel} db-level`}>
           مدیر

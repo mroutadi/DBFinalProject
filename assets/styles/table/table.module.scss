@@ -1,0 +1,78 @@
+@import "../variables";
+.container {
+	width: 100%;
+	height: calc(100% - 50px);
+	overflow: auto;
+	position: relative;
+	.body,
+	.header {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+		position: relative;
+
+		.row {
+			display: table-row;
+			.column {
+				display: table-cell;
+				text-align: center;
+				padding: 10px;
+				border-bottom: 1px solid rgba($color: $LAYOUT_BG, $alpha: 0.3);
+				transition: 0.3s;
+			}
+		}
+	}
+	.header {
+		.row {
+			.column {
+				font-weight: bold;
+			}
+		}
+	}
+	.body {
+		.row {
+			&:hover {
+				.column {
+					border-bottom: 1px solid rgba($color: $LAYOUT_BG, $alpha: 0.8);
+					transition: 0.3s;
+					cursor: pointer;
+				}
+			}
+			.column {
+			}
+		}
+	}
+}
+.loaderCont {
+	width: 100%;
+	height: calc(100% - 50px);
+	align-content: center;
+	justify-content: center;
+	display: grid;
+	.loader {
+		border: 8px solid $DARK_MAIN_COLOR;
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
+		border-radius: 50%;
+		width: 80px;
+		height: 80px;
+		animation: spin 2s linear infinite;
+	}
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(150deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	75% {
+		transform: rotate(210deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
