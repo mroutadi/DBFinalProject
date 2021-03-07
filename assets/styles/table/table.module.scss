@@ -52,36 +52,3 @@
 		}
 	}
 }
-.loaderCont {
-	width: 100%;
-	height: calc(100% - 50px);
-	align-content: center;
-	justify-content: center;
-	display: grid;
-	.loader {
-		border: 8px solid $DARK_MAIN_COLOR;
-		border-top: 8px solid transparent;
-		border-bottom: 8px solid transparent;
-		border-radius: 50%;
-		width: 80px;
-		height: 80px;
-		animation: spin 2s linear infinite;
-	}
-}
-@keyframes spin {
-	0% {
-		transform: rotate(0deg);
-	}
-	25% {
-		transform: rotate(150deg);
-	}
-	50% {
-		transform: rotate(180deg);
-	}
-	75% {
-		transform: rotate(210deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}

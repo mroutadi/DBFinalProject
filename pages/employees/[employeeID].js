@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { getSingleEmployee } from '../../services/Employee/singleEmployee'
 import Layout from '../../layout'
+import HOC from '../../hoc'
+
 export const userContext = React.createContext({ user: null });
 
 export default function Employee() {
@@ -14,10 +16,12 @@ export default function Employee() {
       .then(data => setUser(data));
   }, [router.query.employeeID])
   return (
-    <userContext.Provider value={user}>
-      <Layout>
-        here is employee
+    <HOC access={["admin"]}>
+      <userContext.Provider value={user}>
+        <Layout>
+          here is employee
       </Layout>
-    </userContext.Provider>
+      </userContext.Provider>
+    </HOC>
   )
 }
