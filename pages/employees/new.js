@@ -6,6 +6,7 @@ import HOC from '../../hoc'
 import SimpleInput from '../../components/Forms/SimpleInput'
 import simpleInputStyle from '../../assets/styles/form/simpleInput.module.scss'
 import formStyle from '../../assets/styles/form/form.module.scss'
+import { newEmployee } from '../../services/Employee/newEmployee'
 
 
 export default function Employee() {
@@ -14,95 +15,83 @@ export default function Employee() {
   const [loading, setLoading] = useState(false)
 
   const [initialValues, setInitialValues] = useState({
-    FirstName: "",
-    LastName: "",
-    PhoneNumber: "",
-    UserName: "",
-    NationalID: "",
+    first_name: "",
+    last_name: "",
+    phone_number: "",
+    username: "",
+    national_id: "",
     Role: "",
-    CompanyId: "",
+    password: "",
+    passwordConfirm: ""
   })
   const [ErrorStatus, setErrorStatus] = useState({
-    FirstName: null,
-    LastName: null,
-    PhoneNumber: null,
-    UserName: null,
-    NationalID: null,
+    first_name: null,
+    last_name: null,
+    phone_number: null,
+    username: null,
+    national_id: null,
     Role: null,
-    CompanyId: null,
+    password: null,
+    passwordConfirm: null
   });
   const [ErrorMessages, setErrorMessages] = useState({
-    FirstName: null,
-    LastName: null,
-    PhoneNumber: null,
-    UserName: null,
-    NationalID: null,
+    first_name: null,
+    last_name: null,
+    phone_number: null,
+    username: null,
+    national_id: null,
     Role: null,
-    CompanyId: null,
   });
-  const handleErrors = () => {
+  const handleErrors = (errs) => {
     let error = false;
     let ErrorMessages = {
-      FirstName: null,
-      LastName: null,
-      PhoneNumber: null,
-      UserName: null,
-      NationalID: null,
+      first_name: null,
+      last_name: null,
+      phone_number: null,
+      username: null,
+      national_id: null,
       Role: null,
-      CompanyId: null,
+      password: null,
+      passwordConfirm: null,
     };
-    //FirstName
-    if (!!!initialValues.FirstName) {
-      ErrorMessages.FirstName = "FirstName";
+    //passwordConfirm
+    console.log(initialValues);
+    if (!!initialValues.passwordConfirm && !!initialValues.password && (initialValues.passwordConfirm !== initialValues.password)) {
+
+      ErrorMessages.passwordConfirm = "رمز عبور تکراری درست نیست";
       error = true;
     }
-    //LastName
-    if (!!!initialValues.LastName) {
-      ErrorMessages.LastName = "LastName";
-      error = true;
-    }
-    //PhoneNumber
-    if (!!!initialValues.PhoneNumber) {
-      ErrorMessages.PhoneNumber = "PhoneNumber";
-      error = true;
-    }
-    //UserName
-    if (!!!initialValues.UserName) {
-      ErrorMessages.UserName = "UserName";
-      error = true;
-    }
-    //NationalID
-    if (!!!initialValues.NationalID) {
-      ErrorMessages.NationalID = "NationalID";
-      error = true;
-    }
-    //Role
-    if (!!!initialValues.Role) {
-      ErrorMessages.Role = "Role";
-      error = true;
-    }
-    //CompanyId
-    if (!!!initialValues.CompanyId) {
-      ErrorMessages.CompanyId = "CompanyId";
-      error = true;
-    }
+    Object.keys(initialValues).map(
+      (value) => {
+        if (errs[value]) {
+          ErrorMessages[value] = errs[value][0];
+          error = true;
+        }
+        else if (!!!initialValues[value]) {
+          ErrorMessages[value] = value;
+          error = true;
+        }
+      }
+    )
     setErrorMessages({
-      FirstName: ErrorMessages.FirstName,
-      LastName: ErrorMessages.LastName,
-      PhoneNumber: ErrorMessages.PhoneNumber,
-      UserName: ErrorMessages.UserName,
-      NationalID: ErrorMessages.NationalID,
+      first_name: ErrorMessages.first_name,
+      last_name: ErrorMessages.last_name,
+      phone_number: ErrorMessages.phone_number,
+      username: ErrorMessages.username,
+      national_id: ErrorMessages.national_id,
       Role: ErrorMessages.Role,
-      CompanyId: ErrorMessages.CompanyId,
+      password: ErrorMessages.password,
+      passwordConfirm: ErrorMessages.passwordConfirm,
     })
     setErrorStatus({
-      FirstName: !!ErrorMessages.FirstName,
-      LastName: !!ErrorMessages.LastName,
-      PhoneNumber: !!ErrorMessages.PhoneNumber,
-      UserName: !!ErrorMessages.UserName,
-      NationalID: !!ErrorMessages.NationalID,
+      first_name: !!ErrorMessages.first_name,
+      last_name: !!ErrorMessages.last_name,
+      phone_number: !!ErrorMessages.phone_number,
+      username: !!ErrorMessages.username,
+      national_id: !!ErrorMessages.national_id,
       Role: !!ErrorMessages.Role,
-      CompanyId: !!ErrorMessages.CompanyId,
+      password: !!ErrorMessages.password,
+      passwordConfirm: !!ErrorMessages.passwordConfirm,
     })
     return error;
   }
@@ -121,32 +110,32 @@ export default function Employee() {
           enableReinitialize
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            // setLoading(true);
-            // setSubmitting(true)
-            // if (handleErrors()) {
-            //   setLoading(false);
-            // } else {
-            //   login(values.USERNAME, values.PASSWORD)
-            //     .then(
-            //       response => response.data
-            //     )
-            //     .then(
-            //       (res) => {
-            //         attachJWT(res.access_token)
-            //         router.push("/employees")
-            //       }
-            //     ).catch(
-            //       (err) => {
-            //         err && err.error && handleErrors(err.error.username[0], err.error.password[0])
-            //       }
-            //     )
-            //   setLoading(false);
-            // }
+            setLoading(true);
+            setSubmitting(true)
+            if (handleErrors([])) {
+              setLoading(false);
+            } else {
+              newEmployee(values)
+                .then(
+                  response => response && response.data
+                ).then(
+                  data => {
+                    console.log("user Added Successfully");
+                    setTimeout(() => {
+                      router.push("/employees")
+                    }, 1000);
+                  }
+                  ).catch(
+                  (err) => {
+                    console.log(err.response);
+                    err.response.status === 422 && handleErrors(err.response.data.errors)
+                  }
+                )
+              setLoading(false);
+            }
             // setSubmitting(false)
-            console.log(values);
-          }
-        }
-        >
+            console.log(values)
+          }}>
           {({
             values,
             handleBlur,
@@ -157,72 +146,75 @@ export default function Employee() {
               <form onSubmit={handleSubmit}>
                 <div className={formStyle.formContainer}>
                   <SimpleInput
-                    name="FirstName"
-                    id="FirstName"
+                    name="first_name"
+                    id="first_name"
                     type="text"
-                    label="نام"
+                    label="*نام"
                     placeholder="لطفا نام کابر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.FirstName}
+                    value={values.first_name}
                     disabled={!!loading}
-                    error={ErrorStatus.FirstName && ErrorMessages.FirstName}
+                    autoComplete="off"
+                    error={ErrorStatus.first_name && ErrorMessages.first_name}
                   />
                   <SimpleInput
-                    name="LastName"
-                    id="LastName"
+                    name="last_name"
+                    id="last_name"
                     type="text"
-                    label="نام خانوادگی"
+                    label="*نام خانوادگی"
                     placeholder="لطفا نام خانوادگی کاربر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.LastName}
+                    value={values.last_name}
                     disabled={!!loading}
-                    error={ErrorStatus.LastName && ErrorMessages.LastName}
+                    autoComplete="off"
+                    error={ErrorStatus.last_name && ErrorMessages.last_name}
                   />
                   <SimpleInput
-                    name="PhoneNumber"
-                    id="PhoneNumber"
+                    name="phone_number"
+                    id="phone_number"
                     type="text"
-                    label="شماره همراه"
+                    label="*شماره همراه"
                     placeholder="لطفا شماره همراه کاربر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.PhoneNumber}
+                    value={values.phone_number}
                     disabled={!!loading}
-                    error={ErrorStatus.PhoneNumber && ErrorMessages.PhoneNumber}
+                    autoComplete="off"
+                    error={ErrorStatus.phone_number && ErrorMessages.phone_number}
                   />
                   <SimpleInput
-                    name="UserName"
-                    id="UserName"
+                    name="username"
+                    id="username"
                     type="text"
-                    label="نام کاربری"
+                    label="*نام کاربری"
                     placeholder="لطفا نام کاربری کاربر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.UserName}
+                    value={values.username}
                     disabled={!!loading}
                     autoComplete="off"
-                    error={ErrorStatus.UserName && ErrorMessages.UserName}
+                    error={ErrorStatus.username && ErrorMessages.username}
                   />
                   <SimpleInput
-                    name="NationalID"
-                    id="NationalID"
+                    name="national_id"
+                    id="national_id"
                     type="text"
-                    label="کد ملی"
+                    label="*کد ملی"
                     placeholder="لطفا کد ملی کاربر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.NationalID}
+                    value={values.national_id}
                     disabled={!!loading}
                     autoComplete="off"
-                    error={ErrorStatus.NationalID && ErrorMessages.NationalID}
+                    error={ErrorStatus.national_id && ErrorMessages.national_id}
                   />
                   <SimpleInput
                     name="Role"
                     id="Role"
                     type="text"
-                    label="سِمَت کاربر"
+                    label="*سِمَت کاربر"
                     placeholder="لطفا سطح دسترسی کاربر را انتخاب کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -231,18 +223,34 @@ export default function Employee() {
                     autoComplete="off"
                     error={ErrorStatus.Role && ErrorMessages.Role}
                   />
+                </div>
+                <br /><br /><br />
+                <div className={formStyle.formContainer}>
                   <SimpleInput
-                    name="CompanyId"
-                    id="CompanyId"
+                    name="password"
+                    id="password"
                     type="text"
-                    label="اسم شرکت"
-                    placeholder="لطفا اسم شرکت کاربر را انتخاب کنید"
+                    label="*رمز ورود"
+                    placeholder="لطفا برای کاربر رمز ورود اولیه تعیین کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.CompanyId}
+                    value={values.password}
                     disabled={!!loading}
                     autoComplete="off"
-                    error={ErrorStatus.CompanyId && ErrorMessages.CompanyId}
+                    error={ErrorStatus.password && ErrorMessages.password}
+                  />
+                  <SimpleInput
+                    name="passwordConfirm"
+                    id="passwordConfirm"
+                    type="text"
+                    label="*تکرار رمز ورود"
+                    placeholder="لطفا رمز عبور را تکرار کنید"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.passwordConfirm}
+                    disabled={!!loading}
+                    autoComplete="off"
+                    error={ErrorStatus.passwordConfirm && ErrorMessages.passwordConfirm}
                   />
                 </div>
                 <button type="submit"

@@ -21,6 +21,7 @@ AxiosInstance.interceptors.response.use(
     if (err && err.response && err.response.status === 401) {
       Router.push('/login')
     }
+    return Promise.reject(err)
   }
 )
 
