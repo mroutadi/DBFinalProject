@@ -1,155 +1,189 @@
 @import "../variables";
-.Sidebar {
-	display: grid;
-	align-content: space-around;
-	grid-template-rows: 400px calc(100% - 450px);
-	justify-items: center;
-	.UserInfoSide {
-		width: 350px;
-		height: 400px;
-
-		background: $LAYOUT_BGL;
-		box-shadow: 0 0 15px -5px $LAYOUT_BGL;
-		border-radius: 25px;
+.SidebarContainer {
+	position: relative;
+	overflow: hidden;
+	.Sidebar {
 		display: grid;
-		grid-template-rows: 210px 50px 40px 40px 50px;
 		align-content: space-around;
-		justify-content: center;
-		.UserImage {
-			width: 200px;
-			height: 200px;
-			border-radius: 10%;
-			overflow: hidden;
-			margin: 10px auto;
+		grid-template-rows: 400px calc(100% - 450px);
+		justify-items: center;
+		height: 100%;
+		width: 100%;
+		.UserInfoSide {
+			width: 350px;
+			height: 400px;
+
+			background: $LAYOUT_BGL;
+			box-shadow: 0 0 15px -5px $LAYOUT_BGL;
+			border-radius: 25px;
 			display: grid;
-			align-content: center;
+			grid-template-rows: 210px 50px 40px 40px 50px;
+			align-content: space-around;
 			justify-content: center;
-			.img {
-				min-width: 100%;
-				min-height: 100%;
+			.UserImage {
+				width: 200px;
+				height: 200px;
+				border-radius: 10%;
+				overflow: hidden;
+				margin: 10px auto;
+				display: grid;
+				align-content: center;
+				justify-content: center;
+				.img {
+					min-width: 100%;
+					min-height: 100%;
+				}
 			}
-		}
-		.UserInfo {
-			font-family: Dana;
-			font-style: normal;
-			font-weight: bold;
-			font-size: 28px;
-			line-height: 47px;
-			display: flex;
-			align-items: center;
-			text-align: center;
-			justify-content: center;
-			direction: rtl;
-			position: relative;
-
-			color: $WHITE;
-		}
-		.UserName {
-			font-family: Dana;
-			font-style: normal;
-			font-weight: bold;
-			font-size: 22px;
-			line-height: 47px;
-			display: flex;
-			align-items: center;
-			text-align: right;
-			direction: rtl;
-			position: relative;
-
-			color: $WHITE;
-			&::before {
-				position: absolute;
-				right: -30px;
-			}
-		}
-		.UserLevel {
-			font-family: Dana;
-			font-style: normal;
-			font-weight: normal;
-			font-size: 25px;
-			line-height: 32px;
-			display: flex;
-			align-items: center;
-			text-align: right;
-			direction: rtl;
-			position: relative;
-
-			color: $WHITE;
-			&::before {
+			.UserInfo {
+				font-family: Dana;
+				font-style: normal;
+				font-weight: bold;
 				font-size: 28px;
-				position: absolute;
-				right: -30px;
-			}
-		}
-		.UserAccess {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			align-content: center;
-			justify-content: space-around;
-			width: 100%;
-			div {
+				line-height: 47px;
+				display: flex;
+				align-items: center;
 				text-align: center;
-				font-size: 28px;
+				justify-content: center;
+				direction: rtl;
+				position: relative;
+
 				color: $WHITE;
-				opacity: 0.75;
-				transition: 0.3s;
-				&:hover::after {
+			}
+			.UserName {
+				font-family: Dana;
+				font-style: normal;
+				font-weight: bold;
+				font-size: 22px;
+				line-height: 47px;
+				display: flex;
+				align-items: center;
+				text-align: right;
+				direction: rtl;
+				position: relative;
+
+				color: $WHITE;
+				&::before {
 					position: absolute;
-					top: 90%;
-					font-size: 20px;
-					background-color: rgba($color: $BODY_BG2, $alpha: 0.5);
-					padding: 5px;
-					border-radius: 5px;
-					left: 0;
+					right: -30px;
 				}
-				&:hover {
-					opacity: 1;
-					cursor: pointer;
+			}
+			.UserLevel {
+				font-family: Dana;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 25px;
+				line-height: 32px;
+				display: flex;
+				align-items: center;
+				text-align: right;
+				direction: rtl;
+				position: relative;
+
+				color: $WHITE;
+				&::before {
+					font-size: 28px;
+					position: absolute;
+					right: -30px;
+				}
+			}
+			.UserAccess {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				align-content: center;
+				justify-content: space-around;
+				width: 100%;
+				div {
+					text-align: center;
+					font-size: 28px;
+					color: $WHITE;
+					opacity: 0.75;
 					transition: 0.3s;
+					&:hover::after {
+						position: absolute;
+						top: 90%;
+						font-size: 20px;
+						background-color: rgba($color: $BODY_BG2, $alpha: 0.5);
+						padding: 5px;
+						border-radius: 5px;
+						left: 0;
+					}
+					&:hover {
+						opacity: 1;
+						cursor: pointer;
+						transition: 0.3s;
+					}
+				}
+				.Edit {
+					position: relative;
+					&:hover::after {
+						content: "ویرایش";
+					}
+				}
+				.Notifications {
+					position: relative;
+					&:hover::after {
+						content: "اعلانات";
+					}
+				}
+				.something {
+					position: relative;
+					&:hover::after {
+						content: "خروج";
+					}
 				}
 			}
-			.Edit {
-				position: relative;
-				&:hover::after {
-					content: "ویرایش";
-				}
-			}
-			.Notifications {
-				position: relative;
-				&:hover::after {
-					content: "اعلانات";
-				}
-			}
-			.something {
-				position: relative;
-				&:hover::after {
-					content: "خروج";
+		}
+		.RoutesSide {
+			width: 100%;
+			display: grid;
+			justify-content: center;
+			.RouteItem {
+				width: 300px;
+				height: 50px;
+				border-bottom: 1px solid $WHITE;
+				font-family: Dana;
+				font-style: normal;
+				font-size: 20px;
+				line-height: 33px;
+				display: flex;
+				align-items: center;
+				text-align: right;
+				letter-spacing: -0.025em;
+				font-weight: bold;
+				color: rgba(255, 255, 255);
+				&:hover {
+					text-shadow: 0 0 15px $DARK_MAIN_COLOR;
+					padding: 0 10px;
 				}
 			}
 		}
 	}
-	.RoutesSide {
-		width: 100%;
-		display: grid;
-		justify-content: center;
-		.RouteItem {
-			width: 300px;
-			height: 50px;
-			border-bottom: 1px solid $WHITE;
-			font-family: Dana;
-			font-style: normal;
-			font-size: 20px;
-			line-height: 33px;
-			display: flex;
-			align-items: center;
-			text-align: right;
-			letter-spacing: -0.025em;
-			font-weight: bold;
-			color: rgba(255, 255, 255);
-			&:hover {
-				text-shadow: 0 0 15px $DARK_MAIN_COLOR;
-				padding: 0 10px;
-			}
-		}
+	.CollapsedAdmin {
+		left: 100%;
+		position: absolute;
+		transition: 0.3s;
+	}
+	.OpenedAdmin {
+		left: 0;
+		position: absolute;
+		transition: 0.3s;
+	}
+	.CollapsedUser {
+		right: 100%;
+		position: absolute;
+		transition: 0.3s;
+	}
+	.OpenedUser {
+		right: 0;
+		position: absolute;
+		transition: 0.3s;
+	}
+}
+@keyframes rtl {
+	from {
+		right: 100%;
+	}
+	to {
+		right: 0;
 	}
 }
