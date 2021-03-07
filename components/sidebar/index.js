@@ -66,7 +66,10 @@ export default function Sidebar() {
                 <div className={`${styles.Edit} db-edit`}></div>
                 <div className={`${styles.Notifications} db-notif`} ></div>
                 <div className={`${styles.something} db-logout`} onClick={() => {
-                  logout().then(res => console.log("you've been log out"));
+                  if (confirm('آیا مطمئن هستید که میخواهید خارج شوید؟')) {
+                    router.push('/login')
+                    logout().then(res => console.log("you've been log out"));
+                  }
                 }}></div>
               </div>
             </div>
@@ -101,7 +104,10 @@ export default function Sidebar() {
                 <div className={`${styles.Edit} db-edit`}></div>
                 <div className={`${styles.Notifications} db-notif`} ></div>
                 <div className={`${styles.something} db-logout`} onClick={() => {
-                  logout().then(res => console.log("you've been log out"));
+                  if (confirm('آیا مطمئن هستید که میخواهید خارج شوید؟')) {
+                    router.push('/login')
+                    logout().then(res => console.log("you've been log out"));
+                  }
                 }}></div>
               </div>
             </div>
