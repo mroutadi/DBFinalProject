@@ -15,6 +15,9 @@ export default function Sidebar() {
   const [sidebar, setSidebar] = useState("ADMIN") //ADMIN or USER just in adminmode
   const user = useContext(userContext);
   const router = useRouter();
+  const amdinModeStatus = 
+    router.pathname.includes("employees/") &&
+    !!!router.pathname.includes("employees/new")
   useEffect(() => {
     if (data && data.data.role === "admin") {
       setAvailableRoutes(routes.selfAdmin)
@@ -27,7 +30,7 @@ export default function Sidebar() {
     if (
       data &&
       data.data.role === "admin" &&
-      router.pathname.includes("employees/")) {
+      !!amdinModeStatus) {
         setAdminMode(true)
         setSidebar("USER")
       }

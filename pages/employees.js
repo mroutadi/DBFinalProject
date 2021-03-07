@@ -55,9 +55,11 @@ export default function Table() {
     <HOC access={["admin"]}>
       <Layout>
         <div className={ndStyle.newData}>
-          <button className={ndStyle.newDataButton}>
-            افزودن کارمند جدید
-          </button>
+          <Link href="/employees/new">
+            <a className={ndStyle.newDataButton}>
+              افزودن کارمند جدید
+            </a>
+          </Link>
         </div>
         {!!loading ? <div className={"loaderCont"}><div className={"loader"} /></div> : <div className={table.container}>
           <div className={table.header}>
