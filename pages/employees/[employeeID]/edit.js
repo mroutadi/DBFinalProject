@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Layout from '../../layout'
+import Layout from '../../../layout'
 import { Formik } from 'formik'
-import HOC from '../../hoc'
-import SimpleInput from '../../components/Forms/SimpleInput'
-import simpleInputStyle from '../../assets/styles/form/simpleInput.module.scss'
-import formStyle from '../../assets/styles/form/form.module.scss'
-import { newEmployee } from '../../services/Employee/newEmployee'
+import HOC from '../../../hoc'
+import SimpleInput from '../../../components/Forms/SimpleInput'
+import simpleInputStyle from '../../../assets/styles/form/simpleInput.module.scss'
+import formStyle from '../../../assets/styles/form/form.module.scss'
+import { editEmployee } from '../../../services/Employee/editEmployee'
+import { getSingleEmployee } from '../../../services/Employee/singleEmployee'
 
-
-export default function NewEmployee() {
-
+export default function EditEmployee() {
+  const [user, setUser] = useState(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false)
-
-  const [initialValues, setInitialValues] = useState({
+  const [formValues, setFormValues] = useState({
     first_name: "",
     last_name: "",
     phone_number: "",
     username: "",
     national_id: "",
-    Role: "",
+    role: "",
     password: "",
     passwordConfirm: ""
   })
@@ -30,7 +29,7 @@ export default function NewEmployee() {
     phone_number: null,
     username: null,
     national_id: null,
-    Role: null,
+    role: null,
     password: null,
     passwordConfirm: null
   });
@@ -40,7 +39,7 @@ export default function NewEmployee() {
     phone_number: null,
     username: null,
     national_id: null,
-    Role: null,
+    role: null,
   });
   const handleErrors = (errs) => {
     let error = false;
@@ -50,24 +49,23 @@ export default function NewEmployee() {
       phone_number: null,
       username: null,
       national_id: null,
-      Role: null,
+      role: null,
       password: null,
       passwordConfirm: null,
     };
     //passwordConfirm
-    console.log(initialValues);
-    if (!!initialValues.passwordConfirm && !!initialValues.password && (initialValues.passwordConfirm !== initialValues.password)) {
+    if (!!formValues.passwordConfirm && !!formValues.password && (formValues.passwordConfirm !== formValues.password)) {
 
       ErrorMessages.passwordConfirm = "رمز عبور تکراری درست نیست";
       error = true;
     }
-    Object.keys(initialValues).map(
+    Object.keys(formValues).map(
       (value) => {
         if (errs[value]) {
           ErrorMessages[value] = errs[value][0];
           error = true;
         }
-        else if (!!!initialValues[value]) {
+        else if (!!!formValues[value]) {
           ErrorMessages[value] = value;
           error = true;
         }
@@ -79,7 +77,7 @@ export default function NewEmployee() {
       phone_number: ErrorMessages.phone_number,
       username: ErrorMessages.username,
       national_id: ErrorMessages.national_id,
-      Role: ErrorMessages.Role,
+      role: ErrorMessages.role,
       password: ErrorMessages.password,
       passwordConfirm: ErrorMessages.passwordConfirm,
     })
@@ -89,52 +87,62 @@ export default function NewEmployee() {
       phone_number: !!ErrorMessages.phone_number,
       username: !!ErrorMessages.username,
       national_id: !!ErrorMessages.national_id,
-      Role: !!ErrorMessages.Role,
+      role: !!ErrorMessages.role,
       password: !!ErrorMessages.password,
       passwordConfirm: !!ErrorMessages.passwordConfirm,
     })
     return error;
   }
   const handleChange = (event) => {
-    setInitialValues({
-      ...initialValues,
+    setFormValues({
+      ...formValues,
       [event.target.name]: event.target.value
     })
   }
-
+  useEffect(() => {
+    router.query.employeeID && getSingleEmployee(router.query.employeeID)
+      .then(res => res.data)
+      .then(data => setUser(data))
+  }, [router.query.employeeID])
+  useEffect(() => {
+    let values;
+    if(user) {
+      values = Object.assign({}, user)
+      setFormValues(values)
+    }
+  }, [user, router.query.employeeID])
   return (
     <HOC access={["admin"]}>
       <Layout>
-        <h1 className={simpleInputStyle.Title}>افزودن کارمند جدید</h1>
+        <h1 className={simpleInputStyle.Title}>ویرایش کارمند</h1>
         <Formik
           enableReinitialize
-          initialValues={initialValues}
+          initialValues={formValues}
           onSubmit={(values, { setSubmitting }) => {
             setLoading(true);
             setSubmitting(true)
             if (handleErrors([])) {
               setLoading(false);
+              setSubmitting(false)
             } else {
-              newEmployee(values)
+              editEmployee(router.query.employeeID, values)
                 .then(
                   response => response && response.data
                 ).then(
                   data => {
-                    console.log("user Added Successfully");
                     setTimeout(() => {
                       router.push("/employees")
                     }, 1000);
                   }
-                  ).catch(
+                ).catch(
                   (err) => {
                     console.log(err.response);
                     err.response.status === 422 && handleErrors(err.response.data.errors)
                   }
                 )
               setLoading(false);
+              setSubmitting(false)
             }
-            // setSubmitting(false)
-            console.log(values)
           }}>
           {({
             values,
@@ -153,7 +161,7 @@ export default function NewEmployee() {
                     placeholder="لطفا نام کابر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.first_name}
+                    value={formValues.first_name}
                     disabled={!!loading}
                     autoComplete="off"
                     error={ErrorStatus.first_name && ErrorMessages.first_name}
@@ -166,7 +174,7 @@ export default function NewEmployee() {
                     placeholder="لطفا نام خانوادگی کاربر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.last_name}
+                    value={formValues.last_name}
                     disabled={!!loading}
                     autoComplete="off"
                     error={ErrorStatus.last_name && ErrorMessages.last_name}
@@ -179,7 +187,7 @@ export default function NewEmployee() {
                     placeholder="لطفا شماره همراه کاربر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.phone_number}
+                    value={formValues.phone_number}
                     disabled={!!loading}
                     autoComplete="off"
                     error={ErrorStatus.phone_number && ErrorMessages.phone_number}
@@ -192,7 +200,7 @@ export default function NewEmployee() {
                     placeholder="لطفا نام کاربری کاربر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.username}
+                    value={formValues.username}
                     disabled={!!loading}
                     autoComplete="off"
                     error={ErrorStatus.username && ErrorMessages.username}
@@ -205,23 +213,23 @@ export default function NewEmployee() {
                     placeholder="لطفا کد ملی کاربر را وارد کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.national_id}
+                    value={formValues.national_id}
                     disabled={!!loading}
                     autoComplete="off"
                     error={ErrorStatus.national_id && ErrorMessages.national_id}
                   />
                   <SimpleInput
-                    name="Role"
-                    id="Role"
+                    name="role"
+                    id="role"
                     type="text"
                     label="*سِمَت کاربر"
                     placeholder="لطفا سطح دسترسی کاربر را انتخاب کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.Role}
+                    value={formValues.role}
                     disabled={!!loading}
                     autoComplete="off"
-                    error={ErrorStatus.Role && ErrorMessages.Role}
+                    error={ErrorStatus.role && ErrorMessages.role}
                   />
                 </div>
                 <br /><br /><br />
@@ -234,7 +242,7 @@ export default function NewEmployee() {
                     placeholder="لطفا برای کاربر رمز ورود اولیه تعیین کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.password}
+                    value={formValues.password}
                     disabled={!!loading}
                     autoComplete="off"
                     error={ErrorStatus.password && ErrorMessages.password}
@@ -247,7 +255,7 @@ export default function NewEmployee() {
                     placeholder="لطفا رمز عبور را تکرار کنید"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.passwordConfirm}
+                    value={formValues.passwordConfirm}
                     disabled={!!loading}
                     autoComplete="off"
                     error={ErrorStatus.passwordConfirm && ErrorMessages.passwordConfirm}

@@ -79,13 +79,14 @@ export default function Login() {
                 (res) => {
                   attachJWT(res.access_token)
                   router.push("/employees")
+                  setLoading(false);
                 }
               ).catch(
                 (err) => {
                   err && err.error && handleErrors(err.error.username[0], err.error.password[0])
+                  setLoading(false);
                 }
               )
-            setLoading(false);
           }
           setSubmitting(false)
         }}

@@ -10,6 +10,7 @@ export default function SimpleInput(props) {
         placeholder={props.placeholder}
         onChange={props.onChange}
         disabled={props.disabled}
+        value={props.value}
         autoComplete={props.autoComplete}
       >
       </input>
