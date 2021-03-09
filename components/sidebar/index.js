@@ -85,7 +85,7 @@ export default function Sidebar() {
               </Link>
           )}
         </div>
-        <button onClick={() => setSidebar("ADMIN")}>خودم</button>
+        <button className={styles.Button} onClick={() => setSidebar("ADMIN")}>اطلاعات خودم</button>
       </div>
       <div className={`${styles.Sidebar} ${sidebar === "ADMIN" ? styles.OpenedAdmin : styles.CollapsedAdmin}`}>
         <div className={styles.UserInfoSide}>
@@ -123,7 +123,7 @@ export default function Sidebar() {
               </Link>
           )}
         </div>
-        {adminMode && <button onClick={() => setSidebar("USER")}>کاربر</button>}
+        {adminMode && <button className={styles.UButton} onClick={() => setSidebar("USER")}>اطلاعات کارمند</button>}
       </div>
     </div>
   )

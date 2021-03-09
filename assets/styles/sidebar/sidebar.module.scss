@@ -159,6 +159,34 @@
 				}
 			}
 		}
+		.Button,
+		.UButton {
+			position: absolute;
+			right: 35px;
+			top: 15px;
+			width: 150px;
+			height: 50px;
+			background-color: $DARK_MAIN_COLOR;
+			color: $WHITE;
+			outline: nonel;
+			border: none;
+			border-radius: 10px;
+			font-family: Dana;
+			font-size: 1.25rem;
+			opacity: 0.3;
+			transition: 0.3s;
+			text-align: center;
+
+			&:hover {
+				opacity: 1;
+				transition: 0.3s;
+				cursor: pointer;
+			}
+		}
+		.UButton {
+			right: unset;
+			left: 35px;
+		}
 	}
 	.CollapsedAdmin {
 		left: 100%;
