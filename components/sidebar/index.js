@@ -15,10 +15,7 @@ export default function Sidebar() {
   const [sidebar, setSidebar] = useState("ADMIN") //ADMIN or USER just in adminmode
   const [user, setUser] = useState()
   const router = useRouter();
-  const amdinModeStatus =
-    !!router.pathname.includes("employees/") &&
-    !!!router.pathname.includes("employees/new") &&
-    !!!(router.pathname.includes("employees") && router.pathname.includes("edit"))
+
   useEffect(() => {
     router.query.employeeID &&
       getSingleEmployee(router.query.employeeID)
@@ -35,17 +32,19 @@ export default function Sidebar() {
     if (
       data &&
       data.data.role === "admin" &&
-      !!amdinModeStatus) {
+      (
+        !!router.pathname.includes("employees/") &&
+        !!!router.pathname.includes("employees/new") &&
+        !!!(router.pathname.includes("employees") && router.pathname.includes("edit"))
+      )
+    ) {
       setAdminMode(true)
       setSidebar("USER")
     }
-  }, [router, router.query.employeeID])
-  const urlCreator = (route) => {
-    if (data && (data.data.role === "admin" || data.data.role === "employee")) return `/${route}`;
-    else if (
-      data &&
-      data.data.role === "employee" &&
-      router.pathname.includes("employees")) return `${asPath}${route}`;
+  }, [data, router, router.query.employeeID])
+  const urlCreator = (route, admin) => {
+    if (admin) return `/employees/${router.query.employeeID}/${route}`;
+    else return `/${route}`;
   }
   return (
     <div className={styles.SidebarContainer}>
@@ -79,7 +78,7 @@ export default function Sidebar() {
         <div className={styles.RoutesSide}>
           {Object.keys(routes.adminUser).map(
             (route) =>
-              <Link href={`${urlCreator(route)}`} key={route}>
+              <Link href={`${urlCreator(route, true)}`} key={route}>
                 <a className={`${styles.RouteItem} deActive`}>
                   {routes.adminUser[route]}
                 </a>
@@ -117,7 +116,7 @@ export default function Sidebar() {
         <div className={styles.RoutesSide}>
           {Object.keys(availableRoutes).map(
             (route) =>
-              <Link href={`${urlCreator(route)}`} key={route}>
+              <Link href={`${urlCreator(route, false)}`} key={route}>
                 <a className={`${styles.RouteItem} deActive`}>
                   {availableRoutes[route]}
                 </a>

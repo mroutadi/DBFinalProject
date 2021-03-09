@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import Layout from '../layout'
-import ndStyle from '../assets/styles/utils/newData.module.scss'
-import table from '../assets/styles/table/table.module.scss'
+import Layout from '../../layout'
+import ndStyle from '../../assets/styles/utils/newData.module.scss'
+import table from '../../assets/styles/table/table.module.scss'
 import React, { useEffect, useState } from 'react';
-import { getEmployees } from '../services/Employee/employeeList'
-import HOC from '../hoc'
+import { getEmployees } from '../../services/Employee/employeeList'
+import HOC from '../../hoc'
 
 export default function Table() {
   const [rowData, setRowData] = useState([]);
@@ -53,7 +53,7 @@ export default function Table() {
 
   return (
     <HOC access={["admin"]}>
-      <Layout>
+      <Layout sideNav="employees">
         <div className={ndStyle.newData}>
           <Link href="/employees/new">
             <a className={ndStyle.newDataButton}>

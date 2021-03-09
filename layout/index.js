@@ -10,7 +10,7 @@ export default function Layout(props) {
       <div className={styles.Body}>
         <span className={styles.bgContainerl} />
         <div className={styles.Layout}>
-          <Sidebar />
+          <Sidebar sideNav={props.sideNav}/>
           <div className={styles.Content}>
             {props.children}
           </div>
